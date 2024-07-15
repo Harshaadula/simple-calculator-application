@@ -1,0 +1,126 @@
+public class Calculator {
+
+    // Method to add two numbers
+    public double add(double num1, double num2) {
+        return num1 + num2;
+    }
+
+    // Method to subtract two numbers
+    public double subtract(double num1, double num2) {
+        return num1 - num2;
+    }
+
+    // Method to multiply two numbers
+    public double multiply(double num1, double num2) {
+        return num1 * num2;
+    }
+
+    // Method to divide two numbers
+    public double divide(double num1, double num2) {
+        if (num2 == 0) {
+            throw new IllegalArgumentException("Cannot divide by zero");
+        }
+        return num1 / num2;
+    }
+
+    // Method to calculate square root of a number
+    public double squareRoot(double num) {
+        if (num < 0) {
+            throw new IllegalArgumentException("Cannot calculate square root of a negative number");
+        }
+        return Math.sqrt(num);
+    }
+
+    // Method to calculate power of a number
+    public double power(double base, double exponent) {
+        return Math.pow(base, exponent);
+    }
+}
+import java.util.Scanner;
+
+public class Main {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        Calculator calculator = new Calculator();
+
+        while (true) {
+            System.out.println("Choose an operation:");
+            System.out.println("1. Addition");
+            System.out.println("2. Subtraction");
+            System.out.println("3. Multiplication");
+            System.out.println("4. Division");
+            System.out.println("5. Square Root");
+            System.out.println("6. Power");
+            System.out.println("0. Exit");
+
+            int choice = scanner.nextInt();
+
+            if (choice == 0) {
+                System.out.println("Calculator closed.");
+                break;
+            }
+
+            double result = 0;
+
+            try {
+                switch (choice) {
+                    case 1:
+                        System.out.print("Enter first number: ");
+                        double addNum1 = scanner.nextDouble();
+                        System.out.print("Enter second number: ");
+                        double addNum2 = scanner.nextDouble();
+                        result = calculator.add(addNum1, addNum2);
+                        break;
+                    case 2:
+                        System.out.print("Enter first number: ");
+                        double subNum1 = scanner.nextDouble();
+                        System.out.print("Enter second number: ");
+                        double subNum2 = scanner.nextDouble();
+                        result = calculator.subtract(subNum1, subNum2);
+                        break;
+                    case 3:
+                        System.out.print("Enter first number: ");
+                        double mulNum1 = scanner.nextDouble();
+                        System.out.print("Enter second number: ");
+                        double mulNum2 = scanner.nextDouble();
+                        result = calculator.multiply(mulNum1, mulNum2);
+                        break;
+                    case 4:
+                        System.out.print("Enter dividend: ");
+                        double divNum1 = scanner.nextDouble();
+                        System.out.print("Enter divisor: ");
+                        double divNum2 = scanner.nextDouble();
+                        result = calculator.divide(divNum1, divNum2);
+                        break;
+                    case 5:
+                        System.out.print("Enter number to find square root of: ");
+                        double numForSqrt = scanner.nextDouble();
+                        result = calculator.squareRoot(numForSqrt);
+                        break;
+                    case 6:
+                        System.out.print("Enter base: ");
+                        double base = scanner.nextDouble();
+                        System.out.print("Enter exponent: ");
+                        double exponent = scanner.nextDouble();
+                        result = calculator.power(base, exponent);
+                        break;
+                    default:
+                        System.out.println("Invalid choice. Please enter a number between 0-6.");
+                        continue;
+                }
+
+                System.out.println("Result: " + result);
+            } catch (IllegalArgumentException e) {
+                System.out.println("Error: " + e.getMessage());
+            } finally {
+                // Consume the newline character left by nextDouble()
+                scanner.nextLine();
+            }
+
+            System.out.println(); // Empty line for better readability
+        }
+
+        scanner.close();
+    }
+}
